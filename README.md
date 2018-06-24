@@ -18,12 +18,14 @@ such as:
 * testImage@3x.png
 
 3. The content of your "Contents.json" at "Assets.xcassets" is:
-* {
-*    "info" : {
-*      "version" : 1,
-*      "author" : "xcode"
-*    }
-* }
+<pre><code>
+{
+     "info" : {
+      "version" : 1,
+      "author" : "xcode"
+     }
+}
+</code></pre>
 
 note: If the content of your "Contents.json" is not the same as describe above,
 you can change corresponding code in "Contants.swift". Then you can use this
@@ -32,4 +34,4 @@ app to add images to your project
 
 ## License
 
-BLEManager is distributed under the terms and conditions of the Apache License, Version 2.0         
+This project is distributed under the terms and conditions of the Apache License, Version 2.0         
