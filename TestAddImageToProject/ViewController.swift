@@ -46,7 +46,7 @@ class ViewController: NSViewController {
         mStatusLabel.stringValue = "srcDirPath is: \(srcDirPath) \n dstDirPath is: \(dstDirPath)"
     }
     
-    //2. user choose a destination directory (project中的Assets.xcassets)
+    //2. user choose a destination directory (Assets.xcassets of xcode project)
     @IBAction func SelectDstDir(_ sender: Any) {
         dstDirPath = chooseFileFromDefaultPanel()
         print("dstDirPath is: \(dstDirPath)")
@@ -84,21 +84,37 @@ class ViewController: NSViewController {
             if tmp != [] && tmp[0] != "" {
                 let folderBeCreated = "\(tmp[0]).imageset"
                 let (result,msg) = FolderUtils.createFolder(path: dstDir + folderBeCreated)
-                copyFile(srcDirPath: sourceDir + "1x", srcFilename: filename, dstDirPath: dstDir + folderBeCreated, dstFilename: filename)
+                let (result2,msg2) = copyFile(srcDirPath: sourceDir + "1x", srcFilename: filename, dstDirPath: dstDir + folderBeCreated, dstFilename: filename)
+                if !result {
+                    mStatusLabel.stringValue = "srcDirPath is: \(srcDirPath) \n dstDirPath is: \(dstDirPath) \n createFolder error: \(msg)"
+                    return
+                }
+                if !result2 {
+                    mStatusLabel.stringValue = "srcDirPath is: \(srcDirPath) \n dstDirPath is: \(dstDirPath) \n createFolder error: \(msg2)"
+                    return
+                }
             }
         }
         for filename in filenameList2 {
             let tmp = filename.split(separator: "@")
             if tmp != [] && tmp[0] != "" {
                 let folder = "\(tmp[0]).imageset"
-                copyFile(srcDirPath: sourceDir + "2x", srcFilename: filename, dstDirPath: dstDir + folder, dstFilename: filename)
+                let (result,msg) = copyFile(srcDirPath: sourceDir + "2x", srcFilename: filename, dstDirPath: dstDir + folder, dstFilename: filename)
+                if !result {
+                    mStatusLabel.stringValue = "srcDirPath is: \(srcDirPath) \n dstDirPath is: \(dstDirPath) \n copyFile error: \(msg)"
+                    return
+                }
             }
         }
         for filename in filenameList3 {
             let tmp = filename.split(separator: "@")
             if tmp != [] && tmp[0] != "" {
                 let folder = "\(tmp[0]).imageset"
-                copyFile(srcDirPath: sourceDir + "3x", srcFilename: filename, dstDirPath: dstDir + folder, dstFilename: filename)
+                let (result,msg) = copyFile(srcDirPath: sourceDir + "3x", srcFilename: filename, dstDirPath: dstDir + folder, dstFilename: filename)
+                if !result {
+                    mStatusLabel.stringValue = "srcDirPath is: \(srcDirPath) \n dstDirPath is: \(dstDirPath) \n copyFile error: \(msg)"
+                    return
+                }
             }
         }
         //4.
@@ -110,10 +126,15 @@ class ViewController: NSViewController {
                 let twoXFilename = "\(tmp[0])@2x.png"
                 let threeXFilename = "\(tmp[0])@3x.png"
                 let content = Contants.generateContentJsonContent(oneXFilename: oneXFilename, twoXFilename: twoXFilename, threeXFilename: threeXFilename)
-                createFile(dstPath: dstDir + folder + "/Contents.json", fileContent: content)
+                let (result,msg) = createFile(dstPath: dstDir + folder + "/Contents.json", fileContent: content)
+                if !result {
+                    mStatusLabel.stringValue = "srcDirPath is: \(srcDirPath) \n dstDirPath is: \(dstDirPath) \n createFile \"Content.json\" error: \(msg)"
+                    return
+                }
             }
         }
         
+        mStatusLabel.stringValue = "srcDirPath is: \(srcDirPath) \n dstDirPath is: \(dstDirPath) \n Complete!!!"
     }
     
     
