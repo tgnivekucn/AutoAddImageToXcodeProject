@@ -226,7 +226,15 @@ class ViewController: NSViewController {
         do {
             try fileManager.copyItem(at: srcURL, to: dstURL)
         } catch {
-            return (false,"Error in copying data: \(error)")
+            //暫時只處理已存在檔案的case
+            do {
+                try fileManager.removeItem(at: dstURL)
+                try fileManager.copyItem(at: srcURL, to: dstURL)
+            } catch {
+                return (false,"Error in copying data after delete exited file: \(error)")
+
+            }
+
         }
         return (true,"success")
     }

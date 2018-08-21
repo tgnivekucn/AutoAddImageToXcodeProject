@@ -1,0 +1,8 @@
+TestAddImageToProject/Assets.xcassets/.*
+TestAddImageToProject.xcodeproj/xcuserdata/
+TestAddImageToProject.xcodeproj/project.xcworkspace/xcuserdata/*
+TestAddImageToProject.xcodeproj/project.xcworkspace/xcshareddata/
+.DS_Store
+TestAddImageToProject/.DS_Store
+TestAddImageToProject/*/.DS_Store
+
