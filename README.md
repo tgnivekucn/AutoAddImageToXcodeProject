@@ -20,6 +20,23 @@ such as:
 3. The content of your "Contents.json" at "Assets.xcassets" is:
 <pre><code>
 {
+  "images" : [
+    {
+      "idiom" : "universal",
+      "filename" : "testImage@1x.png",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "testImage@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "testImage@3x.png",
+      "scale" : "3x"
+    }
+  ],
      "info" : {
       "version" : 1,
       "author" : "xcode"
